@@ -1,6 +1,6 @@
+require("dotenv").config({ path: ".env.local" });
 const upstashRedisRestUrl = process.env.UPSTASH_REDIS_REST_URL;
 const authToken = process.env.UPSTASH_REDIS_REST_TOKEN;
-console.log(upstashRedisRestUrl);
 
 type Command = "zrange" | "sismember" | "get" | "smembers";
 
@@ -22,5 +22,6 @@ export async function fetchRedis(
   }
 
   const data = await response.json();
+
   return data.result;
 }
