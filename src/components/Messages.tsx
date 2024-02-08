@@ -1,3 +1,4 @@
+"use client";
 import { FC, useRef, useState } from "react";
 
 interface MessagesProps {
@@ -17,12 +18,10 @@ const Messages: FC<MessagesProps> = ({ initalMessages, sessionId }) => {
       <div ref={scrollDownRef} />
 
       {messages.map((message, index) => {
-        const isCurrentUser = message.se === sessionId;
+        const isCurrentUser = message.senderId === sessionId;
         const hasNextMessagesFromSameUSer =
           messages[index - 1].senderId === messages[index].senderId;
-          return(
-            
-          )
+        return <div></div>;
       })}
     </div>
   );

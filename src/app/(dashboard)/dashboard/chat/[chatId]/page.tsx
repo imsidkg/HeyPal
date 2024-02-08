@@ -1,10 +1,12 @@
+import Messages from "@/components/Messages";
 import { authOptions } from "@/lib/auth";
 import { db } from "@/lib/db";
+import { messageArrayValidator } from "@/lib/validations/messages";
 import { fetchRedis } from "@/redis/helper";
 import { getServerSession } from "next-auth";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { Message } from "postcss";
+import ChatInput from "@/components/ChatInput";
 
 interface pageProps {
   params: {
@@ -20,9 +22,11 @@ async function getChatMessages(chatId: string) {
       -1
     );
     const dbMessages = results.map((message) => {
-      JSON.parse(message) as Message;
+      JSON.parse(message) as Messages;
     });
-    const reverseDbMessages = dbMessages.reverse();
+    const reversedDbMessages = dbMessages.reverse();
+    const messages = messageArrayValidator.parse(reversedDbMessages);
+    return messages;
   } catch (error) {
     notFound();
   }
@@ -40,7 +44,10 @@ const page = async ({ params }: pageProps) => {
   }
 
   const chatPartnerId = user.id === userId1 ? userId2 : userId1;
-  const chatPartnerRaw = (await db.get(`user:${chatPartnerId}`)) as string;
+  const chatPartnerRaw = (await fetchRedis(
+    "get",
+    `user:${chatPartnerId}`
+  )) as string;
   const chatPartner = JSON.parse(chatPartnerRaw) as User;
   const initialMessages = await getChatMessages(chatId);
   return (
@@ -69,6 +76,7 @@ const page = async ({ params }: pageProps) => {
         </div>
       </div>
       <Messages initalMessages={initialMessages} sessionId={session.user.id} />
+      <ChatInput chatPartner={chatPartner} />
     </div>
   );
 };

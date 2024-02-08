@@ -36,7 +36,7 @@ export async function POST(req: Request) {
 
     db.sadd(`user:${session.user.id}:friends`, idToAdd);
     db.sadd(`user:${idToAdd}:friends`, session.user.id);
-    db.srem(`user:${session.user.id}:incoming_friend_request`, idToAdd);
+    db.srem(`user:${session.user.id}:incoming_friend_requests`, idToAdd);
     return new Response("OK");
   } catch (error) {}
 }

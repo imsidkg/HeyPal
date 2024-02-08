@@ -54,7 +54,7 @@ const FriendRequests: FC<FriendRequestsProps> = ({
 
             <button className="w-8 h-8 bg-red-600 hover:bg-red-700 grid place-items-center rounded-full transition hover:shadow-md">
               <X
-                onClick={() => acceptFriend(request.senderId)}
+                onClick={() => denyFriend(request.senderId)}
                 className="font-semibold text-white w-3/4 h-3/4"
               />
             </button>
