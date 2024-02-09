@@ -1,5 +1,6 @@
 "use client";
 import { FC, useRef, useState } from "react";
+import { format } from "date-fns";
 
 interface MessagesProps {
   initalMessages: Messages[];
@@ -9,6 +10,9 @@ interface MessagesProps {
 const Messages: FC<MessagesProps> = ({ initalMessages, sessionId }) => {
   const [messages, setMessages] = useState<Messages[]>(initalMessages);
   const scrollDownRef = useRef<HTMLDivElement | null>(null);
+  const formatTimestamp = (timestamp: number) => {
+    return format(timestamp, "HH:mm");
+  };
 
   return (
     <div
