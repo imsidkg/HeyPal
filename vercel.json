@@ -1,7 +1,7 @@
 {
     "version": 2,
     "functions": {
-      "src/app/**/*.js": {
+      "src/**/*.ts": {
         "maxDuration": 60
       }
     }
