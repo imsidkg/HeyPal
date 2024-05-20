@@ -1,0 +1,9 @@
+{
+    "version": 2,
+    "functions": {
+      "src/app/**/*.js": {
+        "maxDuration": 60
+      }
+    }
+  }
+  
