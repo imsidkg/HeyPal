@@ -1,7 +1,7 @@
 import type { User, Session } from "next-auth";
 import type { JWT } from "next-auth/jwt";
 type UserId = string;
-
+export const maxDuration = 60; 
 declare module "next-auth/jwt" {
   interface JWT {
     id: UserId;

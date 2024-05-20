@@ -1,5 +1,5 @@
 "use client"
-
+export const maxDuration = 60; 
 import Button from '@/components/ui/Button'
 import { signOut } from 'next-auth/react'
 
